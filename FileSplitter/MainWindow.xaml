@@ -25,7 +25,7 @@
             <ListView Name="ListView" MinHeight="100" MaxHeight="180" BorderBrush="{x:Null}" ItemsSource="{Binding Path=FileList,Mode=OneWay,UpdateSourceTrigger=Explicit}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn  Header="File Name" Width="auto" DisplayMemberBinding="{Binding}" />
+                        <GridViewColumn  Header="File Name" Width="380" DisplayMemberBinding="{Binding}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
