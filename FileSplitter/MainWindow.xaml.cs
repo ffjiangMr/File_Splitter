@@ -79,21 +79,21 @@ namespace FileSplitter
                     Int32 totleLenght = 0;
                     length = stream.Read(buffer, 0, buffer.Length);
                     while (length != 0)
-                    {                        
+                    {
                         var offset = 0;
-                        if (((this.dataContext.LimitSize * FileSplitterContent.M) - totleLenght) < (4 * FileSplitterContent.M))
+                        if (((this.dataContext.LimitSize * FileSplitterContent.M) - totleLenght) < length)
                         {
-                            var count = (this.dataContext.LimitSize * FileSplitterContent.M) - totleLenght;
+                            Int32 count = 0;
+                            count = (this.dataContext.LimitSize * FileSplitterContent.M) - totleLenght;
+                            totleLenght = 0;
                             using (var writer = new FileStream(fileName + "_" + num.ToString(), FileMode.OpenOrCreate, FileAccess.ReadWrite))
                             {
                                 writer.Position = writer.Length;
                                 writer.Write(buffer, 0, count);
                             }
-                            offset = count;
-                            totleLenght = 0;
+                            offset = count;                            
                             num++;
                         }
-
                         using (var writer = new FileStream(fileName + "_" + num.ToString(), FileMode.OpenOrCreate, FileAccess.ReadWrite))
                         {
                             writer.Position = writer.Length;
