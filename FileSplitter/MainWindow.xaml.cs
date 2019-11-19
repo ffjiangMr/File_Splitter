@@ -20,6 +20,8 @@ namespace FileSplitter
     public partial class MainWindow : Window
     {
 
+        private const int BufferSize = 1 * FileSplitterContent.M;
+
         private FileSplitterContent dataContext = FileSplitterContent.GetInstance();
         public MainWindow()
         {
@@ -75,7 +77,7 @@ namespace FileSplitter
                 using (var stream = new FileStream(item, FileMode.Open, FileAccess.Read))
                 {
                     Int32 length = -1;
-                    Byte[] buffer = new Byte[4 * FileSplitterContent.M];
+                    Byte[] buffer = new Byte[BufferSize];
                     Int32 totleLenght = 0;
                     length = stream.Read(buffer, 0, buffer.Length);
                     while (length != 0)
@@ -126,7 +128,7 @@ namespace FileSplitter
                             using (var reader = new FileStream(file, FileMode.Open, FileAccess.Read))
                             {
                                 Int32 read = -1;
-                                Byte[] buffer = new Byte[4 * FileSplitterContent.M];
+                                Byte[] buffer = new Byte[BufferSize];
                                 read = reader.Read(buffer, 0, buffer.Length);
                                 while (read != 0)
                                 {
@@ -143,7 +145,6 @@ namespace FileSplitter
                                     catch (Exception ex)
                                     {
                                         Thread.Sleep(10);
-                                        //ToDo
                                     }
                                 }
                             }
