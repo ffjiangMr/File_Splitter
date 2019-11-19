@@ -17,7 +17,7 @@
 
             <StackPanel Margin="5" Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Margin="5,20">Limit Size</TextBlock>
-                <TextBox x:Name="Size" Text="{Binding Path=Size,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" MinWidth="50" Height="30" Margin="5" IsEnabled="{Binding Path=IsChecked,ElementName=Decompose,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+                <TextBox x:Name="Size" Text="{Binding Path=Size,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" MinWidth="50" Height="30" Margin="5" IsEnabled="{Binding Path=IsChecked,ElementName=Decompose,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></TextBox>
                 <Button Name="SelectFile" Width="80" Height="50" Click="SelectFile_Click">SelectFile</Button>
             </StackPanel>
         </DockPanel>

@@ -77,9 +77,9 @@ namespace FileSplitter
                     Int32 length = -1;
                     Byte[] buffer = new Byte[4 * FileSplitterContent.M];
                     Int32 totleLenght = 0;
+                    length = stream.Read(buffer, 0, buffer.Length);
                     while (length != 0)
-                    {
-                        length = stream.Read(buffer, 0, buffer.Length);
+                    {                        
                         var offset = 0;
                         if (((this.dataContext.LimitSize * FileSplitterContent.M) - totleLenght) < (4 * FileSplitterContent.M))
                         {
@@ -100,6 +100,7 @@ namespace FileSplitter
                             writer.Write(buffer, offset, length - offset);
                             totleLenght += (length - offset);
                         }
+                        length = stream.Read(buffer, 0, buffer.Length);
                     }
                 }
             }
