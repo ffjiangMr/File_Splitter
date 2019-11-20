@@ -34,7 +34,11 @@ namespace FileSplitter
         private void SelectFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = true;
+            fileDialog.Multiselect = false;
+            if (this.dataContext.IsComposeFile == true)
+            {
+                fileDialog.Multiselect = true;
+            }
             if (fileDialog.ShowDialog() == true)
             {
                 this.dataContext.FileList.Clear();
@@ -93,7 +97,7 @@ namespace FileSplitter
                                 writer.Position = writer.Length;
                                 writer.Write(buffer, 0, count);
                             }
-                            offset = count;                            
+                            offset = count;
                             num++;
                         }
                         using (var writer = new FileStream(fileName + "_" + num.ToString(), FileMode.OpenOrCreate, FileAccess.ReadWrite))
@@ -104,6 +108,7 @@ namespace FileSplitter
                         }
                         length = stream.Read(buffer, 0, buffer.Length);
                     }
+                    MessageBox.Show("文件分解完成", "提示", MessageBoxButton.OK);
                 }
             }
         }
@@ -121,6 +126,13 @@ namespace FileSplitter
                 if (list.Contains(fileName) == false)
                 {
                     list.Add(fileName);
+                    if (File.Exists(fileName) == true)
+                    {
+                        if (MessageBox.Show($"文件已存在，是否继续？{Environment.NewLine}继续将删除此文件！！！", "警告", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+                        {
+                            File.Delete(fileName);
+                        }
+                    }
                     foreach (var file in fileLsit)
                     {
                         if (file.StartsWith(fileName))
@@ -152,6 +164,7 @@ namespace FileSplitter
                     }
                 }
             }
+            MessageBox.Show("文件合成完成", "提示", MessageBoxButton.OK);
         }
 
         private List<String> Sort()
